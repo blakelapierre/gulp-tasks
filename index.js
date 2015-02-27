@@ -1,9 +1,14 @@
-module.exports = function(gulp, files) {
-  files = files || './tasks';
+// module.exports = function(gulp, tasks) {
+//   for (var key in tasks) {
+//     tasks[key](gulp);
+//   }
+//   return tasks;
+// };
 
-  if (!Array.isArray(files)) files = [files];
-
-  files.forEach(function(file) {
-    require(file)(gulp);
-  });
+module.exports = function(gulp, require) {
+  var tasks = require('./tasks');
+  for (var key in tasks) {
+    tasks[key](gulp);
+  }
+  return tasks;
 };
