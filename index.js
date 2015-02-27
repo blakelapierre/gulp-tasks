@@ -3,7 +3,7 @@ module.exports = function(gulp, files) {
 
   if (!Array.isArray(files)) files = [files];
 
-  files.forEach(files, function(file) {
+  files.forEach(function(file) {
     require(file)(gulp);
   });
 };
