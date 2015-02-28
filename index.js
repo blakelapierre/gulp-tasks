@@ -1,7 +1,16 @@
 module.exports = function(gulp, require, tasksModule) {
-  var tasks = require(tasksModule || './tasks');
-  for (var key in tasks) {
-    tasks[key](gulp);
+  tasksModule = tasksModule || './tasks';
+  try {
+    var tasks = require(tasksModule);
+    for (var key in tasks) {
+      tasks[key](gulp);
+    }
+    return tasks;
   }
-  return tasks;
+  catch (e) {
+    if (e.code === 'MODULE_NOT_FOUND') {
+      return 'No external tasks found in ' + tasksModule;
+    }
+    throw e;
+  }
 };
